@@ -15,17 +15,14 @@ namespace ScheduleService.Controllers
     {
         private readonly AppDbContext _db;
         private ResponseDto _response;
-        private readonly IConfiguration _configuration;
         private IMapper _mapper;
-        private int _appointmentSlotInterval;
+        private readonly int _appointmentSlotInterval = Constants.AppointmentSlotInterval;
 
-        public ProviderController(AppDbContext db, IMapper mapper, IConfiguration configuration)
+        public ProviderController(AppDbContext db, IMapper mapper)
         {
             _db = db;
             _mapper = mapper;
             _response = new ResponseDto();
-            _configuration = configuration;
-            _appointmentSlotInterval = _configuration.GetValue<int>("AppSettings:AppointmentSlotInterval");
         }
 
         // POST: api/provider/CreateProvider
