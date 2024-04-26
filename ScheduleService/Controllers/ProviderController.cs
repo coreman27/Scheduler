@@ -93,6 +93,13 @@ namespace ScheduleService.Controllers
                 Provider provider = _db.Providers
                    .Where(a => a.ProviderUid == providerUid).First();
 
+                if (startDateTimeLocal.AddDays(1) < endDateTimeLocal)
+                {
+                    _response.IsSuccess = false;
+                    _response.Message = "Start and End times must be within a 24 window.";
+                    return _response;
+                }
+
                 // Convert the providers local time range into UTC time
                 var startDateTimeUTC = TimeZoneInfo.ConvertTimeToUtc(startDateTimeLocal, TimeZoneInfo.FindSystemTimeZoneById(provider.TimeZoneId));
                 var endDateTimeUTC = TimeZoneInfo.ConvertTimeToUtc(endDateTimeLocal, TimeZoneInfo.FindSystemTimeZoneById(provider.TimeZoneId));
@@ -107,7 +114,7 @@ namespace ScheduleService.Controllers
                 if (hasConflicts)
                 {
                     _response.IsSuccess = false;
-                    _response.Message = "Available times entered: conflict with existing Appointment Slots";
+                    _response.Message = "Available times entered conflict with existing Appointment Slots";
                     return _response;
                 }
 
