@@ -43,8 +43,9 @@ Use the Swagger UI to test the endpoints
 - Use existing pre-loaded client and provider. (You can also create your own!)
 - api/provider/SubmitAvailableTime with the provider of your choosing.
 - Use api/client/GetAppointmentSlots/{clientUid} to see a list of available slots you can choose from. Only slots that are at least 24 hours away will be returned.
+- CreateAppointment with the clientUid and the AppointmentSlotUid of your choosing from the list of appointment slots returned.
 - Confirm the appointment by calling api/client/confirmAppointment/{appointmentslotuid}.
 - Check GetAppointmentSlots again and see the appointments that are booked do not show as available anymore.
 - Book another appointment and don't confirm it.
 - Wait the time you set for "ConfirmationWindowLength" and see the appointment get deleted. (Set this to 1 if you dont want to wait)
-
+- Break the program
